@@ -1,11 +1,13 @@
 Name:          libmnl
 Version:       1.0.4
-Release:       15%{?dist}
+Release:       16%{?dist}
 Summary:       A minimalistic Netlink library
 
 License:       LGPLv2+
 URL:           http://netfilter.org/projects/libmnl
 Source0:       http://netfilter.org/projects/libmnl/files/%{name}-%{version}.tar.bz2
+
+Patch01:       0001-libmnl-zero-attribute-padding.patch
 
 BuildRequires: gcc
 BuildRequires: make
@@ -35,7 +37,7 @@ The %{name}-static package contains static libraries for devleoping applications
 
 
 %prep
-%setup -q
+%autosetup -p1
 
 
 %build
@@ -69,6 +71,9 @@ mv examples examples-%{_arch}
 %{_libdir}/*.a
 
 %changelog
+* Thu May 09 2024 Phil Sutter <psutter@redhat.com> - 1.0.4-16
+- libmnl: zero attribute padding
+
 * Mon Aug 09 2021 Mohan Boddu <mboddu@redhat.com> - 1.0.4-15
 - Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
   Related: rhbz#1991688
